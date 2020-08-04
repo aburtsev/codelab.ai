@@ -1,4 +1,10 @@
-# Add files here to ignore them from prettier formatting
+__generated__
+node_modules
+dist
+.next
+yarn-error.log
+yarn.lock
 
-/dist
-/coverage
+/apps/docs/node_modules
+/apps/docs/public
+/apps/docs/.cache

@@ -1,0 +1,107 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+# orbs:
+#   node: circleci/node@3.0.1
+
+executors:
+  # base:
+  #   docker:
+  #     - image: cimg/base:stable
+  node:
+    working_directory: ~/app
+    # environment:
+    #   # install Cypress in Linux-like cache folder
+    #   CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+    docker:
+      - image: circleci/node:13-browsers
+
+commands:
+  yarn_install:
+    description: 'Install Dependencies'
+    steps:
+      - restore_cache:
+          name: 'Restore Yarn Package Cache'
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            # https://discuss.circleci.com/t/circle-2-0-caching-is-too-limited-to-be-very-useful/11694
+            - yarn-packages-
+      - run:
+          name: 'Install NPM Packages'
+          command: yarn install --frozen-lockfile --non-interactive
+      - save_cache:
+          name: 'Save Yarn Package Cache'
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+  build-app:
+    description: 'Build Application'
+    steps:
+      - run:
+          name: 'Build Packages'
+          command: yarn build
+  setup:
+    description: 'Setup Context'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ..
+  eslint:
+    description: 'ESLint on New Commits'
+    steps:
+      - run: yarn eslint
+  commitlint:
+    description: 'Commitlint on New Commits'
+    steps:
+      - run: yarn commitlint
+  unit-tests:
+    description: 'Unit Tests'
+    steps:
+      - run: NX_VERBOSE_LOGGING=true yarn test
+
+jobs:
+  install:
+    executor: node
+    steps:
+      - checkout
+      - yarn_install
+      - build-app
+      - persist_to_workspace:
+          root: ..
+          paths:
+            - app/
+            # - app/node_modules
+            # - app/libs/eslint-config-codelab/node_modules
+            - .cache/Cypress
+  lint:
+    environment:
+      CIRCLE_COMPARE_URL: <<pipeline.project.git_url>>/compare/<<pipeline.git.base_revision>>..<<pipeline.git.revision>>
+      CIRCLE_BASE_REVISION: <<pipeline.git.base_revision>>
+      CIRCLE_REVISION: <<pipeline.git.revision>>
+    executor: node
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+      - run: echo $CIRCLE_COMPARE_URL
+      - setup
+      - eslint
+      - commitlint
+  test:
+    executor: node
+    steps:
+      - setup
+      - unit-tests
+
+workflows:
+  version: 2.1
+  test_app:
+    jobs:
+      - install
+      - lint:
+          requires:
+            - install
+      - test:
+          requires:
+            - install

@@ -1,90 +1,71 @@
-# Codelab
+# What is Codelab.ai
 
-This project was generated using [Nx](https://nx.dev).
+Codelab.ai is a web application builder consisting of a data modeling tool and a view binding layer. It was the only available domain extension left & has nothing to do with Artifical Intelligence, but is a likely addition in the future.
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+- Create models with fields & configure their relationships using a D3.js graph interface.
+- Build the UI by editing the DOM Tree & configuring the components
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+# Built With
 
-## Adding capabilities to your workspace
+### Build
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+- [NX](https://nx.dev/react)
+  - NX is a CLI toolkit for Monorepo development, similar to Angular CLI but framework agnostic
+  - It scaffolds packages & provide us with a unified API for interacting with our libraries
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
+### Frontend
 
 - [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+  - A JavasScript library for building user interfaces, although we only use `.tsx`
+- [Next.js](https://nextjs.org)
+  - A React Framework for server-side rendering (SSR) & other performance optimizations
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+### Backend
 
-## Generate an application
+- [Mongoose]()
+- [Nest.js](https://nestjs.com)
+  - A Node.js framework suitable for micro-services architecture, which heavily uses OOP principles such as dependency injection (DI)
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+### UI
 
-> You can use any of the plugins above to generate applications as well.
+- [Storybook](https://storybook.js.org)
+  - A tool for developing UI components in isolation
+- [Ant Design](https://ant.design)
+  - A UI/Component library for React
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+### Testing
 
-## Generate a library
+- [Jest](https://jestjs.io)
+  - JavaScript testing framework
+- [Cypress](https://www.cypress.io)
+  - E2e testing framework
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+# Getting Started
 
-> You can also use any of the plugins above to generate libraries as well.
+1. Install [NX Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console), you will use the interface to run the application
+2. Install [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), for realtime visual linting
 
-Libraries are sharable across libraries and applications. They can be imported from `@codelab/mylib`.
+The project directory structure is based on NX, with `apps` directory containing all the user facing sites, while `libs` containing all imported libraries.
 
-## Development server
+3. Clone a forked version of the repository
+4. `cp .env.example .env.dev`
+5. `yarn`
+6. NX Console tab -> `Serve` -> `[your-app]`
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+or `Test` for running Jest. For entire list of commands, select `Run`.
 
-## Code scaffolding
+# CI/CD pipeline
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+To commit code, run `yarn commit`. This will trigger the git `pre-commit` hook via [Husky](https://github.com/typicode/husky), which then uses [Lint Staged](https://github.com/okonet/lint-staged) to run [ESLint](https://github.com/eslint/eslint) on staged files. ESLint will use [Prettier](https://github.com/prettier/prettier) to format files.
 
-## Build
+Use a commit message that is relevant to the task in hyphenated-lowercase-or-kebab-case.
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+[Commitizen](https://github.com/commitizen/cz-cli) will also show a terminal prompt for constructing the proper commit message format.
 
-## Running unit tests
+Once pushed to the remote repository, create a Pull Request on Github to `Master`. Once all the unit tests run successfully, the PR will then be reviewed by the administrator.
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+You can run `yarn test` locally to make sure your changes haven't broken any tests.
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+# Site Documentation
 
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+For a more detailed documentation, go to the [Documentation Site](https://docs.codelab.ai)

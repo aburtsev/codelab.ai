@@ -1,0 +1,5 @@
+{
+  "inputFiles": ["./apps/docs"],
+  "out": "apps/docs/typedoc",
+  "tsconfig": "apps/docs/tsconfig.json"
+}

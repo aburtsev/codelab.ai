@@ -15,7 +15,20 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@codelab/react": ["libs/plugins/react/src/index.ts"],
+      "@codelab/eslint-config-codelab": [
+        "libs/eslint-config-codelab/src/index.ts"
+      ],
+      "@codelab/ui": ["libs/ui/src/index.ts"],
+      "@codelab/props": ["libs/props/src/index.ts"],
+      "@codelab/d3": ["libs/d3/src/index.ts"],
+      "@codelab/graph": ["libs/graph/src/index.ts"],
+      "@codelab/dto": ["libs/dto/src/index.ts"],
+      "@codelab/common": ["libs/common/src/index.ts"],
+      "@codelab/event": ["libs/event/src/index.ts"],
+      "@codelab/utils": ["libs/utils/src/index.ts"]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "dist"]
 }
