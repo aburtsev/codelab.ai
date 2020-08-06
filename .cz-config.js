@@ -58,6 +58,7 @@ module.exports = {
     { value: 'props', name: '10) props' },
     { value: 'ui', name: '11) ui' },
     { value: 'utils', name: '12) utils' },
+    { value: 'schema', name: '12) schema' },
   ],
   allowTicketNumber: true,
   isTicketNumberRequired: false,

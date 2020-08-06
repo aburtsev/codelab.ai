@@ -1,13 +1,15 @@
 // Returns any type because no props are required
-import { InputNode, makeTree, Node, traversePostOrder } from '@codelab/graph'
+import { makeTree, Node, traversePostOrder } from '@codelab/graph'
 import { evalPropsWithContext, Props } from '@codelab/props'
 import React, { FunctionComponent, PropsWithChildren } from 'react'
 import { elementParameterFactory } from './ElementFactory'
 import { ElementParameters } from './ElementFactory.interface'
+import { TreeNodeI } from '../../../graph/src/node/codec/Node-tree'
+import { ReactNodeI } from '../../../graph/src/node/codec/Node-react'
 
 export class TreeDom {
   static render<P extends Props>(
-    data: InputNode<P>,
+    data: TreeNodeI<P> | ReactNodeI<P>,
     factory: (
       node: Node<P>,
     ) => ElementParameters<any> = elementParameterFactory,

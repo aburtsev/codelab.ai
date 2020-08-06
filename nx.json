@@ -77,6 +77,15 @@
     },
     "utils": {
       "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "api-config": {
+      "tags": []
+    },
+    "json-schema-to-mongoose": {
+      "tags": []
     }
   }
 }

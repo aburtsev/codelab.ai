@@ -1,0 +1,15 @@
+{
+  "models": [
+    {
+      "name": "User",
+      "fields": [
+        {
+          "name": "username"
+        },
+        {
+          "name": "email"
+        }
+      ]
+    }
+  ]
+}

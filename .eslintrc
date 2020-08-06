@@ -1,1 +1,3 @@
-{ "root": true, "extends": "@codelab/eslint-config-codelab" }
+{
+  "extends": "@codelab/eslint-config-codelab"
+}

@@ -7,4 +7,5 @@ module.exports = {
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageReporters: ['html'],
+  transformIgnorePatterns: ['node_modules/(?!(deepdash-es|lodash-es)/)'],
 }
