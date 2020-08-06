@@ -1,8 +1,8 @@
 ---
 name: '🐞 Bug Report'
 about: Report Current Behavior that is believed to be unintentional or unexpected.
-labels: 'type: bug'
-projects: 'Dev'
+labels: 'bug'
+projects: 'Dev, dev'
 ---
 
 <!-- Please do your best to fill out all of the sections below! -->
