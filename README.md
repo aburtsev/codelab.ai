@@ -58,7 +58,7 @@ or `Test` for running Jest. For entire list of commands, select `Run`.
 
 To commit code, run `yarn commit`. This will trigger the git `pre-commit` hook via [Husky](https://github.com/typicode/husky), which then uses [Lint Staged](https://github.com/okonet/lint-staged) to run [ESLint](https://github.com/eslint/eslint) on staged files. ESLint will use [Prettier](https://github.com/prettier/prettier) to format files.
 
-Use a commit message that is relevant to the task in hyphenated-lowercase-or-kebab-case.
+Use a branch name that is relevant to the task in hyphenated-lowercase-or-kebab-case.
 
 [Commitizen](https://github.com/commitizen/cz-cli) will also show a terminal prompt for constructing the proper commit message format.
 
