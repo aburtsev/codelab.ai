@@ -2,7 +2,12 @@ import { IDeepEntry } from 'deepdash-es/IDeepEntry'
 import { findDeep } from 'deepdash-es/standalone'
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 import { reduce } from 'lodash'
-import { Schema, SchemaDefinition, SchemaType, SchemaTypeOpts } from 'mongoose'
+import mongoose, {
+  Schema,
+  SchemaDefinition,
+  SchemaType,
+  SchemaTypeOpts,
+} from 'mongoose'
 
 type JSONSchema7Property = {
   [name: string]: JSONSchema7Definition
@@ -11,7 +16,7 @@ type JSONSchema7Property = {
 export class JsonSchema {
   schema: JSONSchema7
 
-  models: Array<Model<any>> = []
+  models: Array<mongoose.Model<any>> = []
 
   schemas: { [model: string]: Schema } = {}
 
@@ -25,11 +30,7 @@ export class JsonSchema {
 
     if (!properties) return
 
-    // let mongooseSchema: Schema
-
     for (const [model, definition] of Object.entries(properties)) {
-      // mongooseSchema = JsonSchema.mongooseSchema(definition)
-
       // Find ref
       const { parent, value: ref, ...rest }: IDeepEntry = findDeep(
         definition,
