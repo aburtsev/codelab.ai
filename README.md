@@ -1,6 +1,6 @@
 # What is Codelab.ai
 
-Codelab.ai is a web application builder consisting of a data modeling tool and a view binding layer. It was the only available domain extension left & has nothing to do with Artifical Intelligence, but is a likely addition in the future.
+Codelab.ai is a web application builder consisting of a data modeling tool and a view binding layer. It was the only available domain extension left & has nothing to do with Artificial Intelligence, but is a likely addition in the future.
 
 - Create models with fields & configure their relationships using a D3.js graph interface.
 - Build the UI by editing the DOM Tree & configuring the components
