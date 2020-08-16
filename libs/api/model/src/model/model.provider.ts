@@ -1,6 +1,6 @@
-import { mongooseModels, MongooseModels } from '@codelab/schema'
 import { FactoryProvider } from '@nestjs/common'
 import { JSONSchema7 } from 'json-schema'
+import { mongooseModels, MongooseModels } from '@codelab/schema'
 import { JSON_SCHEMA_REPOSITORY } from '../schema/schema.provider'
 
 export const MONGOOSE_MODELS = 'MONGOOSE_MODELS'

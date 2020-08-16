@@ -3,7 +3,8 @@ import { mongooseModelsProvider, MONGOOSE_MODELS } from './model.provider'
 import { SchemaModule } from '../schema/schema.module'
 
 @Module({
-  providers: [SchemaModule, mongooseModelsProvider],
+  imports: [SchemaModule],
+  providers: [mongooseModelsProvider],
   exports: [MONGOOSE_MODELS],
 })
-export class appMongooseModelsModule {}
+export class ModelModule {}

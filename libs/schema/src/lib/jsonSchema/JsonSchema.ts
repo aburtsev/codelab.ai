@@ -1,7 +1,6 @@
 import { JSONSchema7 } from 'json-schema'
 import * as mongoose from 'mongoose'
 import { reduce } from 'lodash'
-
 import { getSchemaType } from './JsonSchema-types'
 
 export type MongooseModels = {

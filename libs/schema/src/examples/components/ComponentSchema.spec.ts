@@ -3,7 +3,6 @@
  */
 import mongoose from 'mongoose'
 import { JSONSchema7 } from 'json-schema'
-
 import { Schema } from './Schema'
 
 const baseSchema: JSONSchema7 = {

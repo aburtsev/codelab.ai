@@ -2,21 +2,19 @@ import { Module, NestModule, MiddlewareConsumer, Inject } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { ApiConfigModule } from '@codelab/api-config'
 import { RouterModule } from '@codelab/api-router'
-import { SchemaModule, JSON_SCHEMA_REPOSITORY } from '@codelab/api-model'
+import { ModelModule, MONGOOSE_MODELS } from '@codelab/api-model'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AppMiddleware } from './app.middleware'
 @Module({
-  imports: [ApiConfigModule, RouterModule, SchemaModule],
+  imports: [ApiConfigModule, RouterModule, ModelModule],
   controllers: [AppController],
   providers: [AppService, ConfigService],
   exports: [],
 })
 export class AppModule implements NestModule {
-  constructor(
-    @Inject(JSON_SCHEMA_REPOSITORY) private readonly jsonSchemaRepository,
-  ) {
-    console.log(jsonSchemaRepository)
+  constructor(@Inject(MONGOOSE_MODELS) private readonly mongooseModels) {
+    console.log(mongooseModels)
   }
 
   configure(consumer: MiddlewareConsumer) {
