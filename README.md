@@ -50,22 +50,21 @@ The project directory structure is based on NX, with `apps` directory containing
 3. Clone a forked version of the repository
 4. `cp .env.example .env.dev`
 5. `yarn`
-6. NX Console tab -> `Serve` -> `[your-app]`
 
-or `Test` for running Jest. For entire list of commands, select `Run`.
+The NX Console tab has all the commands you'll need to interact with the app under the `Generate & Run Target` section. For the most part, you'll be developing with Jest & Storybook.
+
+6. Select `Run`, which will display all commands in the format of `[package]:[command]`. Use `test` for Jest, & `storybook` for Storybook.
 
 # CI/CD pipeline
 
-To commit code, run `yarn commit`. This will trigger the git `pre-commit` hook via [Husky](https://github.com/typicode/husky), which then uses [Lint Staged](https://github.com/okonet/lint-staged) to run [ESLint](https://github.com/eslint/eslint) on staged files. ESLint will use [Prettier](https://github.com/prettier/prettier) to format files.
+Clone off master and create a local branch using a name that is relevant to the task in hyphenated-lowercase-or-kebab-case. Always rebase master branch before you push, so merge won't have any issues.
 
-Use a branch name that is relevant to the task in hyphenated-lowercase-or-kebab-case.
+To commit code, run `yarn commit`. (This will trigger the git `pre-commit` hook via [Husky](https://github.com/typicode/husky), which then uses [Lint Staged](https://github.com/okonet/lint-staged) to run [ESLint](https://github.com/eslint/eslint) on staged files. ESLint will use [Prettier](https://github.com/prettier/prettier) to format files.)
 
-[Commitizen](https://github.com/commitizen/cz-cli) will also show a terminal prompt for constructing the proper commit message format.
+Follow the CLI prompt to complete the commit. ([Commitizen](https://github.com/commitizen/cz-cli) is used to trigger the terminal prompt for constructing the proper commit message format.)
 
-Once pushed to the remote repository, create a Pull Request on Github to `Master`. Once all the unit tests run successfully, the PR will then be reviewed by the administrator.
+Once pushed to the remote repository, create a Pull Request on Github to `master`. Make sure all the tests run successfully, the PR will then be reviewed by the administrator.
 
-You can run `yarn test` locally to make sure your changes haven't broken any tests.
+<!-- # Site Documentation
 
-# Site Documentation
-
-For a more detailed documentation, go to the [Documentation Site](https://docs.codelab.ai)
+For a more detailed documentation, go to the [Documentation Site](https://docs.codelab.ai) -->
