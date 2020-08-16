@@ -68,7 +68,7 @@ commands:
   unit-tests:
     description: 'Unit Tests'
     steps:
-      - run: yarn test
+      - run: yarn test --skip-nx-cache
 
 jobs:
   install:
@@ -82,6 +82,7 @@ jobs:
           paths:
             - app/node_modules
             - app/libs/eslint-config-codelab
+            - app/libs/plugins/react
             # - .cache/Cypress
   lint:
     environment:
