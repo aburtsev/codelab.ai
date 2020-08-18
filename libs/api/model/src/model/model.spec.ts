@@ -23,8 +23,7 @@ describe('ModelModule', () => {
       .compile()
 
     /**
-     * TODO:
-     * @todo Jest mock type issue
+     * TODO: Jest mock type issue
      * @body We want to remove the "as any" cast
      * @autoAssign webberwang
      */
