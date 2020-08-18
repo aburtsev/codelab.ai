@@ -5,13 +5,10 @@
 version: 2.1
 
 orbs:
-  # slack: circleci/slack@3.4.2
+  slack: circleci/slack@3.4.2
   # node: circleci/node@3.0.1
 
 executors:
-  # base:
-  #   docker:
-  #     - image: cimg/base:stable
   node:
     working_directory: ~/app
     environment:
@@ -22,9 +19,29 @@ executors:
       # NODE_ENV: production
     docker:
       - image: circleci/node:14-browsers
-      # - image: circleci/node:13.8.0
 
 commands:
+  # SETUP
+  setup:
+    description: 'Setup Context'
+    steps:
+      - checkout
+      - run:
+          name: 'Setup GIT_COMMIT_MSG'
+          command: |
+            echo 'export GIT_COMMIT_MSG=$(git log --format="format:%s" -n 1 ${CIRCLE_SHA1})' >> $BASH_ENV
+            source $BASH_ENV
+            echo $GIT_COMMIT_MSG
+
+  # use this for jobs that require the repository
+  setup-workspace:
+    description: 'Setup Workspace'
+    steps:
+      - setup
+      - attach_workspace:
+          at: ..
+
+  # INSTALL
   yarn_install:
     description: 'Install Dependencies'
     steps:
@@ -52,12 +69,8 @@ commands:
       - run:
           name: 'Build Packages'
           command: yarn build
-  setup:
-    description: 'Setup Context'
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ..
+
+  # LINT
   eslint:
     description: 'ESLint on New Commits'
     steps:
@@ -66,6 +79,8 @@ commands:
     description: 'Commitlint on New Commits'
     steps:
       - run: yarn commitlint
+
+  # TEST
   unit-tests:
     description: 'Unit Tests'
     steps:
@@ -95,17 +110,29 @@ jobs:
     steps:
       - run: echo "This is pipeline ID << pipeline.id >>"
       - run: echo $CIRCLE_COMPARE_URL
-      - setup
+      - setup-workspace
       - eslint
       - commitlint
   test:
     executor: node
     steps:
-      - setup
+      - setup-workspace
       - unit-tests
+  notify:
+    executor: node
+    steps:
+      - setup
+      - slack/notify:
+          channel: CQVPNKS8K
+          color: '#42e2f4'
+          # mentions: 'USERID1,USERID2,'
+          message: >
+            Status: Success \n
+            Branch: << pipeline.git.branch >> \n
+            Message: $GIT_COMMIT_MSG
+          # webhook: https://hooks.slack.com/services/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
 
 workflows:
-  version: 2.1
   test_app:
     jobs:
       - install
@@ -115,3 +142,7 @@ workflows:
       - test:
           requires:
             - install
+      - notify:
+          requires:
+            - lint
+            - test
