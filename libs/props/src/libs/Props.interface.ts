@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react'
 import { ReactNodeI } from '@codelab/graph'
+import { CSSProperties } from 'react'
 
 export type PropItem = any & Function & PropValue
 
