@@ -1,8 +1,8 @@
 const rootWebpackConfig = require('../../../.storybook/webpack.config')
-const util = require('util')
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
+  // eslint-disable-next-line no-param-reassign
   config = await rootWebpackConfig({ config, mode })
 
   config.resolve.extensions.push('.tsx')

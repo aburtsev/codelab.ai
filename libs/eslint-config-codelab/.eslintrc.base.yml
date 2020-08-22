@@ -47,6 +47,7 @@ overrides:
     parser: esprima
     rules:
       '@typescript-eslint/no-var-requires': off
+      no-param-reassign: off
   - files: ['*.ts', '*.tsx']
     settings:
       import/parser:
