@@ -106,7 +106,8 @@ commands:
   unit-tests:
     description: 'Unit Tests'
     steps:
-      - run: yarn test --skip-nx-cache
+      - run: yarn test
+      # - run: yarn test --skip-nx-cache
 
   # webhook URL is setup using circleci integration
   notify-failure:
@@ -127,7 +128,7 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - build_app
+      # - build_app
       - persist_to_workspace:
           root: ..
           paths:
@@ -183,10 +184,7 @@ jobs:
           #   *Branch*: << pipeline.git.branch >> \n
           #   *Message*: $GIT_COMMIT_MSG \n
 workflows:
-  test_app:
-    when:
-      on_success: notify-success
-      on_fail: notify-failure
+  check_app:
     jobs:
       - install
       - lint:

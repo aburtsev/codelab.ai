@@ -1,3 +1,27 @@
+const path = require('path')
+const glob = require('glob')
+
+const scopes = glob
+  .sync('@(apps|libs)/**/tsconfig.json', {
+    ignore: [
+      '**/node_modules/**/tsconfig.json',
+      '**/.storybook/**/tsconfig.json',
+    ],
+  })
+  // Array of filepaths
+  .map((file) => {
+    const paths = path.dirname(file).split(path.sep)
+
+    return paths.join('-')
+  })
+  // Get concatenated path names
+  .map((name, index) => {
+    return {
+      value: name,
+      name: `${index + 2}) ${name}`,
+    }
+  })
+
 module.exports = {
   types: [
     { value: 'feat', name: '1) feat:     A new feature' },
@@ -38,29 +62,7 @@ module.exports = {
       name: '11) revert:  Reverts a previous commit',
     },
   ],
-  scopes: [
-    { value: '', name: '0) N/A' },
-    { value: 'core', name: '1) core' },
-    { value: 'core-e2e', name: '2) core-e2e' },
-    { value: 'docs', name: '3) docs' },
-    {
-      value: 'plugins-react-e2e',
-      name: '4) plugins-react-e2e',
-    },
-    { value: 'common', name: '5) common' },
-    { value: 'd3', name: '6) d3' },
-    { value: 'graph', name: '7) graph' },
-    {
-      value: 'eslint-config-codelab',
-      name: '8) eslint-config-codelab',
-    },
-    { value: 'plugins-react', name: '9) plugins-react' },
-    { value: 'props', name: '10) props' },
-    { value: 'ui', name: '11) ui' },
-    { value: 'utils', name: '12) utils' },
-    { value: 'schema', name: '12) schema' },
-    { value: 'api-schema', name: '12) api schema' },
-  ],
+  scopes: [{ value: 'default', name: '1) default' }, ...scopes],
   allowTicketNumber: true,
   isTicketNumberRequired: false,
   ticketNumberPrefix: '',
