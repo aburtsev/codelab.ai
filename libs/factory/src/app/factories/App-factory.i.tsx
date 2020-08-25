@@ -1,8 +1,11 @@
-import { TraversalOrder, TraversalIteratee } from '@codelab/graph'
+import { TraversalIteratee, TraversalOrder } from '@codelab/graph'
 import { Factory } from '@codelab/ui'
-import { UIOrder } from '../builder/UIWeb-builder--order'
+import { UIOrder } from '../builder/web/AppWeb-builder--order'
 
-export abstract class UIFactory {
+/**
+ * Factory creates parts for products, then the builder assembles them
+ */
+export abstract class AppFactory {
   public order: UIOrder
 
   private _factory: Factory
@@ -25,4 +28,10 @@ export abstract class UIFactory {
   set traversal(traversal: TraversalOrder) {
     this._traversal = traversal
   }
+
+  set iteratee(iteratee: TraversalIteratee) {
+    this._iteratee = iteratee
+  }
+
+  abstract createReactTree()
 }

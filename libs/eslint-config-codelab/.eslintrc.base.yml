@@ -38,7 +38,11 @@ rules:
     #   order: asc
     #   caseInsensitive: true
   #  sort-imports: error
-  unused-imports/no-unused-imports-ts: error
+  unused-imports/no-unused-imports-ts: off
+  '@typescript-eslint/no-unused-vars': off
+  no-unused-expressions:
+    - error
+    - allowTernary: true
 
 #  unused-imports/no-unused-vars-ts:
 #    - warn
@@ -65,4 +69,3 @@ overrides:
       '@typescript-eslint/no-explicit-any': off
       '@typescript-eslint/explicit-module-boundary-types': off
       '@typescript-eslint/indent': off
-      # '@typescript-eslint/no-unused-vars': off
