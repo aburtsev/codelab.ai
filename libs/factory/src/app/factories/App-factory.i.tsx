@@ -1,37 +1,32 @@
 import { TraversalIteratee, TraversalOrder } from '@codelab/graph'
 import { Factory } from '@codelab/ui'
-import { UIOrder } from '../builder/web/AppWeb-builder--order'
+import { AppOrder } from '../builder/web/AppWeb-builder--order'
+import { TreeStrategy } from '../../tree/strategy/Tree-strategy'
+import { TreeProduct } from '../../tree/Tree-product.i'
 
 /**
  * Factory creates parts for products, then the builder assembles them
  */
 export abstract class AppFactory {
-  public order: UIOrder
+  public order: AppOrder
 
-  private _factory: Factory
+  private _tree: TreeProduct
 
-  private _traversal: TraversalOrder
-
-  private _iteratee: TraversalIteratee
-
-  constructor(order: UIOrder) {
+  constructor(order: AppOrder) {
     this.order = order
   }
 
-  /**
-   * @param factory transforms our node into intermediate, which is used during traversal
-   */
-  set factory(factory: Factory) {
-    this._factory = factory
+  set tree(tree: TreeProduct) {
+    this._tree = tree
   }
 
-  set traversal(traversal: TraversalOrder) {
-    this._traversal = traversal
+  get product(): TreeProduct {
+    return this._tree
   }
 
-  set iteratee(iteratee: TraversalIteratee) {
-    this._iteratee = iteratee
-  }
+  abstract createModel()
 
-  abstract createReactTree()
+  abstract createView()
+
+  abstract createData()
 }

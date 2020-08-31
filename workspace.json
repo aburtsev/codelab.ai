@@ -25,38 +25,6 @@
             "tsConfig": "libs/plugins/react/tsconfig.spec.json",
             "passWithNoTests": true
           }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "libs/plugins/react/dist",
-            "tsConfig": "libs/plugins/react/tsconfig.lib.json",
-            "packageJson": "libs/plugins/react/package.json",
-            "main": "libs/plugins/react/src/index.ts",
-            "assets": [
-              "libs/plugins/react/*.md",
-              {
-                "input": "./libs/plugins/react/src",
-                "glob": "**/.*.!(ts|spec.ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/plugins/react/src",
-                "glob": "**/*.!(ts|spec.ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/plugins/react",
-                "glob": "collection.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/plugins/react",
-                "glob": "builders.json",
-                "output": "."
-              }
-            ]
-          }
         }
       }
     },
@@ -108,6 +76,7 @@
         "build": {
           "builder": "@nrwl/node:package",
           "options": {
+            "srcRootForCompilationRoot": "libs/eslint-config/codelab/src",
             "outputPath": "libs/eslint-config-codelab/dist",
             "tsConfig": "libs/eslint-config-codelab/tsconfig.lib.json",
             "packageJson": "libs/eslint-config-codelab/package.json",
@@ -823,7 +792,9 @@
             "linter": "eslint",
             "tsConfig": [
               "libs/factory/tsconfig.lib.json",
-              "libs/factory/tsconfig.spec.json"
+              "libs/factory/tsconfig.spec.json",
+              "libs/factory/.storybook/tsconfig.json",
+              "libs/factory/.storybook/tsconfig.json"
             ],
             "exclude": ["**/node_modules/**", "!libs/factory/**/*"]
           }
@@ -834,6 +805,36 @@
             "jestConfig": "libs/factory/jest.config.js",
             "tsConfig": "libs/factory/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/factory/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/factory",
+            "config": {
+              "configFolder": "libs/factory/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
