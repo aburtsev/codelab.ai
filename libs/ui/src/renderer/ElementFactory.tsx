@@ -5,6 +5,7 @@ import {
   Affix,
   Alert,
   Anchor,
+  AutoComplete,
   Avatar,
   BackTop,
   Badge,
@@ -27,7 +28,9 @@ import {
   Form,
   Input,
   InputNumber,
+  Layout,
   List,
+  Mentions,
   Menu,
   Modal,
   PageHeader,
@@ -112,6 +115,8 @@ export const elementParameterFactory = <P extends Props>(
       return [Alert as any, props]
     case 'Affix':
       return [Affix as any, props]
+    case 'AutoComplete':
+      return [AutoComplete as any, props]
     case 'Button':
       return [
         withFilters(
@@ -144,6 +149,8 @@ export const elementParameterFactory = <P extends Props>(
       return [Select.Option as any, props]
     case 'Grid':
       return [Grid.Default, props]
+    case 'ResponsiveGrid':
+      return [Grid.Responsive, props]
     case 'Provider':
       return [Provider.Default, props]
     case 'Modal':
@@ -216,10 +223,6 @@ export const elementParameterFactory = <P extends Props>(
       return [BackTop as any, props]
     case 'ConfigProvider':
       return [ConfigProvider as any, props]
-    // case 'Anchor':
-    //   return [Anchor as any, props]
-    // case 'Message':
-    //   return [Message as any, props]
     case 'Popconfirm':
       return [Popconfirm as any, props]
     case 'Transfer':
@@ -248,6 +251,20 @@ export const elementParameterFactory = <P extends Props>(
       return [List.Item as any, props]
     case 'List.Item.Meta':
       return [List.Item.Meta as any, props]
+    case 'Mentions':
+      return [Mentions as any, props]
+    case 'Mentions.Option':
+      return [Mentions.Option as any, props]
+    case 'Layout':
+      return [Layout as any, props]
+    case 'Layout.Header':
+      return [Layout.Header as any, props]
+    case 'Layout.Sider':
+      return [Layout.Sider as any, props]
+    case 'Layout.Content':
+      return [Layout.Content as any, props]
+    case 'Layout.Footer':
+      return [Layout.Footer as any, props]
     case 'Cascader':
       return [Cascader as any, props]
     case 'Popover':
