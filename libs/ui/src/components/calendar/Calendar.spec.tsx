@@ -21,7 +21,6 @@ describe('Calendar', () => {
     expect(getByTitle(year)).toBeTruthy()
     expect(getByTitle(month)).toBeTruthy()
     expect(getByTitle(`${year}-${numericMonth}-${date}`)).toBeTruthy()
-
     expect(getByLabelText('Month')).toBeTruthy()
     expect(getByLabelText('Year')).toBeTruthy()
   })

@@ -1,8 +1,8 @@
 module.exports = {
-  extends: '@codelab/eslint-config-codelab',
+  extends: '../../.eslintrc.js',
   root: true,
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['tsconfig.lib.json', 'tsconfig.spec.json'],
+    project: ['tsconfig.app.json', 'tsconfig.spec.json'],
   },
 }
