@@ -1,6 +1,6 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Form as AntForm, Space, Divider } from 'antd'
-import React from 'react'
+import React, { ReactNode, ReactElement } from 'react'
 import { FieldData, FormListProps } from './Form.types'
 
 export namespace Form {
@@ -52,6 +52,35 @@ export namespace Form {
           }}
         </AntForm.List>
       </>
+    )
+  }
+
+  export const ItemHook: React.FC<any> = ({ children, ...props }) => {
+    const { shouldUpdate, shouldRender, ...restProps } = props
+
+    return (
+      <AntForm.Item noStyle shouldUpdate={shouldUpdate}>
+        {(form) => {
+          const hidden = shouldRender(form.getFieldsValue())
+
+          return (
+            <>
+              {React.Children.toArray(children).map(
+                (child: ReactElement, index: number) => {
+                  return !hidden ? (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <React.Fragment key={index}>
+                      {React.cloneElement(child, {
+                        ...restProps,
+                      })}
+                    </React.Fragment>
+                  ) : null
+                },
+              )}
+            </>
+          )
+        }}
+      </AntForm.Item>
     )
   }
 }
