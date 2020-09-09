@@ -1,70 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "plugins-codelab": {
-      "root": "libs/plugins/codelab",
-      "sourceRoot": "libs/plugins/codelab/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/plugins/codelab/tsconfig.lib.json",
-              "libs/plugins/codelab/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/plugins/codelab/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/plugins/codelab/jest.config.js",
-            "tsConfig": "libs/plugins/codelab/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/plugins/codelab",
-            "tsConfig": "libs/plugins/codelab/tsconfig.lib.json",
-            "packageJson": "libs/plugins/codelab/package.json",
-            "main": "libs/plugins/codelab/src/index.ts",
-            "assets": [
-              "libs/plugins/codelab/*.md",
-              {
-                "input": "./libs/plugins/codelab/src/schematics/library/files",
-                "glob": "**/.*",
-                "output": "./src/schematics/library/files"
-              },
-              {
-                "input": "./libs/plugins/codelab/src",
-                "glob": "**/*.!(ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/plugins/codelab",
-                "glob": "collection.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/plugins/codelab",
-                "glob": "builders.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/plugins/codelab",
-                "glob": "migrations.json",
-                "output": "."
-              }
-            ]
-          }
-        }
-      }
-    },
     "plugins-codelab-e2e": {
       "projectType": "application",
       "root": "apps/plugins/react-e2e",
@@ -73,51 +9,11 @@
         "e2e": {
           "builder": "@nrwl/nx-plugin:e2e",
           "options": {
-            "target": "plugins-codelab:build",
+            "target": "tools-plugins-codelab:build",
             "npmPackageName": "@codelab/plugins-codelab",
             "pluginOutputPath": "dist/libs/react",
             "jestConfig": "apps/plugins/react-e2e/jest.config.js",
             "tsSpecConfig": "apps/plugins/react-e2e/tsconfig.spec.json"
-          }
-        }
-      }
-    },
-    "eslint-config-codelab": {
-      "root": "libs/eslint-config-codelab",
-      "sourceRoot": "libs/eslint-config-codelab/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/eslint-config-codelab/tsconfig.lib.json",
-              "libs/eslint-config-codelab/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/eslint-config-codelab/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/eslint-config-codelab/jest.config.js",
-            "tsConfig": "libs/eslint-config-codelab/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/eslint-config-codelab",
-            "tsConfig": "libs/eslint-config-codelab/tsconfig.lib.json",
-            "packageJson": "libs/eslint-config-codelab/package.json",
-            "main": "libs/eslint-config-codelab/src/index.ts",
-            "assets": ["libs/eslint-config-codelab/**/.*.yml"]
           }
         }
       }
@@ -316,60 +212,6 @@
             "ci": {
               "quiet": true
             }
-          }
-        }
-      }
-    },
-    "dto": {
-      "root": "libs/dto",
-      "sourceRoot": "libs/dto/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/dto/tsconfig.lib.json",
-              "libs/dto/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/dto/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/dto/jest.config.js",
-            "tsConfig": "libs/dto/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "common": {
-      "root": "libs/common",
-      "sourceRoot": "libs/common/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/common/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/common/jest.config.js",
-            "tsConfig": "libs/common/tsconfig.spec.json",
-            "passWithNoTests": true
           }
         }
       }
@@ -872,163 +714,6 @@
         }
       }
     },
-    "plugins-plug": {
-      "root": "libs/plugins/plug",
-      "sourceRoot": "libs/plugins/plug/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/plugins/plug/tsconfig.lib.json",
-              "libs/plugins/plug/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/plugins/plug/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/plugins/plug/jest.config.js",
-            "tsConfig": "libs/plugins/plug/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/plugins/plug",
-            "tsConfig": "libs/plugins/plug/tsconfig.lib.json",
-            "packageJson": "libs/plugins/plug/package.json",
-            "main": "libs/plugins/plug/src/index.ts",
-            "assets": [
-              "libs/plugins/plug/*.md",
-              {
-                "input": "./libs/plugins/plug/src",
-                "glob": "**/*.!(ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/plugins/plug",
-                "glob": "collection.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/plugins/plug",
-                "glob": "builders.json",
-                "output": "."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "tests": {
-      "root": "libs/tests",
-      "sourceRoot": "libs/tests/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/tests/tsconfig.lib.json",
-              "libs/tests/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/tests/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/tests/jest.config.js",
-            "tsConfig": "libs/tests/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/react",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/tests/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/react",
-            "outputPath": "dist/storybook/tests",
-            "config": {
-              "configFolder": "libs/tests/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "publishable": {
-      "root": "libs/publishable",
-      "sourceRoot": "libs/publishable/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/publishable/tsconfig.lib.json",
-              "libs/publishable/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/publishable/**/*"]
-          }
-        },
-        "build": {
-          "builder": "@nrwl/web:package",
-          "options": {
-            "outputPath": "dist/libs/publishable",
-            "tsConfig": "libs/publishable/tsconfig.lib.json",
-            "project": "libs/publishable/package.json",
-            "entryFile": "libs/publishable/src/index.ts",
-            "external": ["react", "react-dom"],
-            "babelConfig": "@nrwl/react/plugins/bundle-babel",
-            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-            "assets": [
-              {
-                "glob": "README.md",
-                "input": ".",
-                "output": "."
-              }
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/publishable/jest.config.js",
-            "tsConfig": "libs/publishable/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "node": {
       "root": "libs/node",
       "sourceRoot": "libs/node/src",
@@ -1109,6 +794,251 @@
             "jestConfig": "libs/api/database/jest.config.js",
             "tsConfig": "libs/api/database/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tools-eslint-config-codelab": {
+      "root": "libs/tools/eslint-config-codelab",
+      "sourceRoot": "libs/tools/eslint-config-codelab/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/tools/eslint-config-codelab/tsconfig.lib.json",
+              "libs/tools/eslint-config-codelab/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/tools/eslint-config-codelab/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/tools/eslint-config-codelab/jest.config.js",
+            "tsConfig": "libs/tools/eslint-config-codelab/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/tools/eslint-config-codelab",
+            "tsConfig": "libs/tools/eslint-config-codelab/tsconfig.lib.json",
+            "packageJson": "libs/tools/eslint-config-codelab/package.json",
+            "main": "libs/tools/eslint-config-codelab/src/index.ts",
+            "assets": ["libs/tools/eslint-config-codelab/**/.*.yml"]
+          }
+        }
+      }
+    },
+    "tools-plugins-codelab": {
+      "root": "libs/tools/plugins/codelab",
+      "sourceRoot": "libs/tools/plugins/codelab/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/tools/plugins/codelab/tsconfig.lib.json",
+              "libs/tools/plugins/codelab/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/tools/plugins/codelab/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/tools/plugins/codelab/jest.config.js",
+            "tsConfig": "libs/tools/plugins/codelab/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/tools/plugins/codelab",
+            "tsConfig": "libs/tools/plugins/codelab/tsconfig.lib.json",
+            "packageJson": "libs/tools/plugins/codelab/package.json",
+            "main": "libs/tools/plugins/codelab/src/index.ts",
+            "assets": [
+              "libs/tools/plugins/codelab/*.md",
+              {
+                "input": "./libs/tools/plugins/codelab/src/schematics/library/files",
+                "glob": "**/.*",
+                "output": "./src/schematics/library/files"
+              },
+              {
+                "input": "./libs/tools/plugins/codelab/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./libs/tools/plugins/codelab",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./libs/tools/plugins/codelab",
+                "glob": "builders.json",
+                "output": "."
+              },
+              {
+                "input": "./libs/tools/plugins/codelab",
+                "glob": "migrations.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "tools-plugins-plug": {
+      "root": "libs/tools/plugins/plug",
+      "sourceRoot": "libs/tools/plugins/plug/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/tools/plugins/plug/tsconfig.lib.json",
+              "libs/tools/plugins/plug/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/tools/plugins/plug/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/tools/plugins/plug/jest.config.js",
+            "tsConfig": "libs/tools/plugins/plug/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/tools/plugins/plug",
+            "tsConfig": "libs/tools/plugins/plug/tsconfig.lib.json",
+            "packageJson": "libs/tools/plugins/plug/package.json",
+            "main": "libs/tools/plugins/plug/src/index.ts",
+            "assets": [
+              "libs/tools/plugins/plug/*.md",
+              {
+                "input": "./libs/tools/plugins/plug/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./libs/tools/plugins/plug",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./libs/tools/plugins/plug",
+                "glob": "builders.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "shared-common": {
+      "root": "libs/shared/common",
+      "sourceRoot": "libs/shared/common/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/common/tsconfig.lib.json",
+              "libs/shared/common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/common/jest.config.js",
+            "tsConfig": "libs/shared/common/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-interface": {
+      "root": "libs/shared/interface",
+      "sourceRoot": "libs/shared/interface/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/interface/tsconfig.lib.json",
+              "libs/shared/interface/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/interface/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/interface/jest.config.js",
+            "tsConfig": "libs/shared/interface/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/shared/interface/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/shared-interface",
+            "config": {
+              "configFolder": "libs/shared/interface/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }

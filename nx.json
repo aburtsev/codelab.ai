@@ -17,22 +17,23 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e"
+        ],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
     }
   },
   "projects": {
-    "plugins-codelab": {
-      "tags": []
-    },
     "plugins-codelab-e2e": {
       "tags": [],
-      "implicitDependencies": ["plugins-codelab"]
-    },
-    "eslint-config-codelab": {
-      "tags": []
+      "implicitDependencies": [
+        "tools-plugins-codelab"
+      ]
     },
     "ui": {
       "tags": []
@@ -44,12 +45,6 @@
       "tags": []
     },
     "graph": {
-      "tags": []
-    },
-    "dto": {
-      "tags": []
-    },
-    "common": {
       "tags": []
     },
     "event": {
@@ -81,7 +76,9 @@
     },
     "core-e2e": {
       "tags": [],
-      "implicitDependencies": ["core"]
+      "implicitDependencies": [
+        "core"
+      ]
     },
     "model": {
       "tags": []
@@ -89,19 +86,25 @@
     "factory": {
       "tags": []
     },
-    "plugins-plug": {
-      "tags": []
-    },
-    "tests": {
-      "tags": []
-    },
-    "publishable": {
-      "tags": []
-    },
     "node": {
       "tags": []
     },
     "api-database": {
+      "tags": []
+    },
+    "tools-eslint-config-codelab": {
+      "tags": []
+    },
+    "tools-plugins-codelab": {
+      "tags": []
+    },
+    "tools-plugins-plug": {
+      "tags": []
+    },
+    "shared-common": {
+      "tags": []
+    },
+    "shared-interface": {
       "tags": []
     }
   }

@@ -3,8 +3,8 @@ import React from 'react'
 import axios from 'axios'
 import { notification, message } from 'antd'
 import { isTreeNode, isReactNode } from '@codelab/node'
-import { isEvalPropValue, isRenderPropValue } from './Props.guards'
-import { Props, PropValue, PropItem } from './Props.interface'
+import { Props, PropValue, PropItem } from '@codelab/shared/interface'
+import { isEvalPropValue } from './Props.guards'
 import { renderReactNodes } from './Props-react'
 
 export const evalPropValue = (propValue: PropValue, ctx?: any): Function => {
