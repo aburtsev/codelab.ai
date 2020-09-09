@@ -1,12 +1,17 @@
 import { decode } from '@codelab/common'
 import { evalPropsWithContext, filterRenderProps, Props } from '@codelab/props'
-import { reduce } from 'lodash'
-import React, { FunctionComponent, ReactNode } from 'react'
+import { reduce, merge } from 'lodash'
+import React, {
+  FunctionComponent,
+  ReactNode,
+  ReactElement,
+  ReactChildren,
+} from 'react'
 import { nodeC } from '../codec/Node.codec'
 import { HasChildren, NodeInterface } from './Node.i'
-import { isReactNode } from '../subtypes/react/Node-react'
 import { NodeI } from '../codec/Node.codec.i'
 import { NodeTypeEnum } from '../codec/Node--type.i'
+import { isReactNode } from '../subtypes/react/Node-react--guard'
 
 /**
  * Node is instantiated during Tree traversal
@@ -26,6 +31,9 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
   public parent?: Node<P>
 
   public children: Array<Node<P>> = []
+
+  // Use this to prevent circular dep
+  public treeDom: any
 
   /**
    * Can take just ID, but fills out other fields
@@ -65,7 +73,28 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
   }
 
   public get renderProps() {
-    return evalPropsWithContext(filterRenderProps(this.props)) ?? {}
+    return filterRenderProps(this.props) ?? {}
+  }
+
+  get mergedProps() {
+    return {
+      key: this.key,
+      ...this.props,
+      ...this.parent.renderProps,
+    }
+  }
+
+  render(
+    Component: any,
+    props: Props,
+    children: ReactNode,
+    hasRootChildren: boolean,
+  ): ReactElement {
+    return this.hasChildren() || hasRootChildren ? (
+      <Component {...props}>{children}</Component>
+    ) : (
+      <Component {...props} />
+    )
   }
 
   /**
@@ -85,24 +114,19 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
     const children = reduce<Node<P>, Array<ReactNode>>(
       this.children,
       (Components: Array<ReactNode>, child: Node<P>) => {
-        const { Component: Child, props, key } = child
-        const evaluatedProps = evalPropsWithContext(props)
+        const { Component: Child, mergedProps } = child
 
         // console.debug(`${this.type} -> ${child.type}`, props)
 
         let ChildComponent: ReactNode = rootChildren ? (
-          <Child key={key} {...evaluatedProps} {...this.renderProps}>
-            {rootChildren}
-          </Child>
+          <Child {...mergedProps}>{rootChildren}</Child>
         ) : (
-          <Child key={key} {...evaluatedProps} {...this.renderProps} />
+          <Child {...mergedProps} />
         )
 
         if (child.hasChildren()) {
           ChildComponent = (
-            <Child key={key} {...evaluatedProps} {...this.renderProps}>
-              {child.Children(rootChildren)}
-            </Child>
+            <Child {...mergedProps}>{child.Children(rootChildren)}</Child>
           )
         }
 
@@ -111,6 +135,6 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
       [],
     )
 
-    return children.length === 1 ? children[0] : children
+    return React.Children.count(children) === 1 ? children[0] : children
   }
 }
