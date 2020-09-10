@@ -1,4 +1,4 @@
-import { PropsFromKeys } from '@codelab/shared/interface'
+import { PropsFromKeys } from '@codelab/shared/interface/props'
 
 export const buttonPropKeys = [
   'disabled',
@@ -15,7 +15,5 @@ export const buttonPropKeys = [
   'block',
   'danger',
 ] as const
-
-// Some changes here
 
 export type ButtonProps = PropsFromKeys<typeof buttonPropKeys[number]>
