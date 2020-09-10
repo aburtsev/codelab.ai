@@ -15,7 +15,8 @@ import { nodeC } from '../codec/node.codec'
 /**
  * Node is instantiated during Tree traversal
  */
-export class Node<P extends Props = {}> implements NodeInterface<P> {
+export class Node<P extends Props = {}>
+  implements NodeInterface<P>, HasChildren<P> {
   public Component: FunctionComponent<any> = () => null
 
   public id: string
@@ -31,9 +32,6 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
 
   public children: Array<Node<P>> = []
 
-  // Use this to prevent circular dep
-  public treeDom: any
-
   /**
    * Can take just ID, but fills out other fields
    */
@@ -41,7 +39,7 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
     const { data } = decode(node, nodeC)
     const { props, nodeType, id } = data
 
-    this.type = isReactNode(data) ? data.type : undefined
+    this.type = isReactNode(data) ? data.type : ''
     this.nodeType = NodeTypeEnum[nodeType]
     this.props = props
     this.id = id
@@ -71,15 +69,21 @@ export class Node<P extends Props = {}> implements NodeInterface<P> {
     return !!this.children.length
   }
 
-  public get renderProps() {
-    return filterRenderProps(this.props) ?? {}
+  public get leafRenderProps() {
+    return filterRenderProps(this.parent?.props, 'leaf') ?? {}
+  }
+
+  public get parentRenderProps() {
+    return filterRenderProps(this.parent?.props, 'single') ?? {}
   }
 
   get mergedProps() {
+    this.props = { ...this.props, ...this.leafRenderProps }
+
     return {
       key: this.key,
       ...this.props,
-      ...this.parent.renderProps,
+      ...this.parentRenderProps,
     }
   }
 

@@ -2,8 +2,8 @@ import { makeTree, traversePostOrder } from '@codelab/entity/graph'
 import { Node } from '@codelab/entity/node'
 import { TreeNodeI, ReactNodeI } from '@codelab/shared/interface/node'
 import {
-  convertToRenderProps,
   evalPropsWithContext,
+  convertToLeafRenderProps,
 } from '@codelab/entity/props'
 import { Props } from '@codelab/shared/interface/props'
 import React, { FunctionComponent, PropsWithChildren } from 'react'
@@ -70,13 +70,10 @@ export class TreeDom {
         hasRootChildren = true
       }
 
+      root.props = { ...root.props, ...convertToLeafRenderProps(rootProps) }
+
       return (
-        <root.Component
-          {...evalPropsWithTreeContext({
-            ...root.props,
-            ...convertToRenderProps(rootProps),
-          })}
-        >
+        <root.Component {...evalPropsWithTreeContext(root.props)}>
           {root.Children(rootChildren)}
         </root.Component>
       )

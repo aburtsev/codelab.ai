@@ -10,7 +10,7 @@ Object.defineProperty(MockSchemaService, 'jsonSchemaData', {
 })
 
 describe('ModelModule', () => {
-  let schemaServiceSpy
+  let schemaServiceSpy: jest.SpyInstance
   let module: TestingModule
 
   beforeEach(async () => {
@@ -25,7 +25,6 @@ describe('ModelModule', () => {
     /**
      * TODO: Jest mock type issue
      * @body We want to remove the "as any" cast
-     * @autoAssign webberwang
      */
     schemaServiceSpy = jest.spyOn(
       MockSchemaService,

@@ -1,15 +1,58 @@
 import { reduce } from 'lodash'
 import { Props } from '@codelab/shared/interface/props'
-import { isRenderPropValue } from './Props.guards'
+import {
+  isSingleRenderPropValue,
+  isLeafRenderPropValue,
+  isRenderPropValue,
+} from './Props.guards'
+
+type PropIteratee = (
+  prop: Props,
+  propValue: Props[keyof Props],
+  propKey: keyof Props,
+) => any
+
+/**
+ * Determine how far down we pass the props
+ */
+export type RenderPropsFilter =
+  // Single level
+  | 'single'
+  // All the way
+  | 'leaf'
+
+export function propsIterator<P extends Props = Props>(
+  props: P,
+  predicate: any = () => true,
+  onTruthy: Function,
+  onFalsy?: Function,
+) {
+  return reduce<Props, Props>(
+    props,
+    (prop: Props, propValue: Props[keyof Props], propKey: keyof Props) => {
+      return predicate(prop, propValue, propKey) || onFalsy === undefined
+        ? onTruthy(prop, propValue, propKey)
+        : onFalsy(prop, propValue, propKey)
+    },
+    {},
+  )
+}
 
 /**
  * Remove non-render props
  */
-export function filterRenderProps(props: Props): Props {
+export function filterRenderProps(
+  props: Props = {},
+  filter?: RenderPropsFilter,
+): Props {
   return reduce<Props, Props>(
     props,
     (prop: Props, propValue: Props[keyof Props], propKey: keyof Props) => {
-      if (isRenderPropValue(propValue)) {
+      if (
+        (filter === undefined && isRenderPropValue(propValue)) ||
+        (filter === 'single' && isSingleRenderPropValue(propValue)) ||
+        (filter === 'leaf' && isLeafRenderPropValue(propValue))
+      ) {
         return {
           ...prop,
           [propKey]: propValue,
@@ -36,6 +79,21 @@ export function convertToRenderProps(props: Props): Props {
         ...prop,
         [propKey]: {
           renderProps: true,
+          value: propValue,
+        },
+      }
+    },
+    {},
+  )
+}
+export function convertToLeafRenderProps(props: Props): Props {
+  return reduce<Props, Props>(
+    props,
+    (prop: Props, propValue: Props[keyof Props], propKey: keyof Props) => {
+      return {
+        ...prop,
+        [propKey]: {
+          renderProps: 'leaf',
           value: propValue,
         },
       }
