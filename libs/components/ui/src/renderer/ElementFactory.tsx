@@ -64,11 +64,13 @@ import {
 import React from 'react'
 import { Icon } from '@ant-design/compatible'
 import { ElementParameters } from './ElementFactory.interface'
-import { buttonPropKeys } from '../components/button'
-import { Form as CodelabForm } from '../components/form/Form'
+import { Button as ButtonTypes } from '../components/button'
+import { CodelabForm } from '../components/form/Form'
 import { Grid } from '../components/grid/Grid'
-import { Html } from '../components/html/Html'
+import { CodelabHtml } from '../components/html/Html'
 import { Provider } from '../components/provider/Provider'
+// eslint-disable-next-line import/no-cycle
+import { CodelabTable } from '../components/table/Table'
 
 export const elementParameterFactory = <P extends Props>(
   node: Node<P>,
@@ -87,7 +89,7 @@ export const elementParameterFactory = <P extends Props>(
     case 'Html.span':
       return ['span', props]
     case 'Text':
-      return [Html.Text as any, props]
+      return [CodelabHtml.Text as any, props]
     case 'Icon':
       return [Icon as any, props]
     case 'Menu':
@@ -121,7 +123,7 @@ export const elementParameterFactory = <P extends Props>(
     case 'Button':
       return [
         withFilters(
-          propsFilter([...mouseEventHandlerKeys, ...buttonPropKeys]),
+          propsFilter([...mouseEventHandlerKeys, ...ButtonTypes.propKeys]),
           Button,
         ),
         props,
@@ -272,6 +274,8 @@ export const elementParameterFactory = <P extends Props>(
       return [Cascader as any, props]
     case 'Popover':
       return [Popover as any, props]
+    case 'Table':
+      return [CodelabTable.Default as any, props]
     default:
       throw new Error('Missing element in ElementFactory')
     // return ['div', props]
