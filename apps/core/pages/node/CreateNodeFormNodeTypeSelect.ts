@@ -1,5 +1,5 @@
-import { ReactNodeI, NodeTypeEnum } from '@codelab/node'
 import { generateSelectOption } from './node.helpers'
+import { ReactNodeI, NodeTypeEnum } from '@codelab/shared/interface/node'
 
 export const CreateNodeFormNodeTypeSelect: ReactNodeI = {
   type: 'Form.Item',

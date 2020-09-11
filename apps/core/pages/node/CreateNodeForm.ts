@@ -1,7 +1,7 @@
-import { ReactNodeI, NodeTypeEnum } from '@codelab/node'
 import { CreateNodeFormNodeTypeSelect } from './CreateNodeFormNodeTypeSelect'
 import { CreateNodeFormTypeSelect } from './CreateNodeFormTypeSelect'
 import { CreateNodeFormProps } from './CreateNodeFormProps'
+import { ReactNodeI, NodeTypeEnum } from '@codelab/shared/interface/node'
 
 export const CreateNodeForm: ReactNodeI = {
   type: 'Modal',

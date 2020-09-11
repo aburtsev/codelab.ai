@@ -1,9 +1,9 @@
 import React from 'react'
-import { TreeDom } from '@codelab/ui'
-import { ReactNodeI } from '@codelab/node'
 import { NodeMngmtPanel } from './NodeMngmtPanel'
 import { CreateNodeForm } from './CreateNodeForm'
 import { treeData } from './NodeTree'
+import { ReactNodeI } from '@codelab/shared/interface/node'
+import { TreeDom } from '@codelab/components/ui'
 
 // TODO Implement draft Node adding = props are empty
 // TODO Implement Popover for adding props (currently it's not clear how get access to add button, it's under the hood)

@@ -1,4 +1,4 @@
-import { ReactNodeI } from '@codelab/node'
+import { ReactNodeI } from '@codelab/shared/interface/node';
 
 export const CreateNodeFormProps: ReactNodeI = {
   type: 'Form.Item',
