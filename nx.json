@@ -17,26 +17,19 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e"
+        ],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
     }
   },
   "projects": {
-    "ui": {
-      "tags": []
-    },
-    "d3": {
-      "tags": []
-    },
-    "event": {
-      "tags": []
-    },
     "docs": {
-      "tags": []
-    },
-    "utils": {
       "tags": []
     },
     "api": {
@@ -79,24 +72,44 @@
       "tags": []
     },
     "shared-interface-props": {
-      "tags": ["scope:standalone"]
+      "tags": [
+        "scope:standalone"
+      ]
     },
     "shared-interface-model": {
       "tags": []
     },
-    "entity-graph": {
-      "tags": []
-    },
-    "entity-node": {
-      "tags": []
-    },
-    "entity-props": {
-      "tags": []
-    },
-    "entity-model": {
-      "tags": []
-    },
     "shared-interface-tree": {
+      "tags": []
+    },
+    "core-graph": {
+      "tags": []
+    },
+    "core-model": {
+      "tags": []
+    },
+    "core-props": {
+      "tags": []
+    },
+    "core-node": {
+      "tags": []
+    },
+    "core-traversal": {
+      "tags": []
+    },
+    "core-tree": {
+      "tags": []
+    },
+    "components-ui": {
+      "tags": []
+    },
+    "components-d3": {
+      "tags": []
+    },
+    "shared-utils": {
+      "tags": []
+    },
+    "shared-event": {
       "tags": []
     }
   }

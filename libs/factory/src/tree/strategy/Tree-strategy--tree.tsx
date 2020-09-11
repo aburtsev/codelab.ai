@@ -1,8 +1,8 @@
 import { Props } from '@codelab/shared/interface/props'
 import { ReactNodeI, TreeNodeI } from '@codelab/shared/interface/node'
 import { TreeSubTreeContext } from '@codelab/shared/interface/tree'
-import { Node } from '@codelab/entity/node'
-import { treeAppenderIteratee, treeWalker } from '@codelab/entity/graph'
+import { Node } from '@codelab/core/node'
+import { treeAppenderIteratee, treeWalker } from '@codelab/core/traversal'
 import { reduce } from 'lodash'
 import { TreeStrategy } from './Tree-strategy'
 
@@ -17,7 +17,7 @@ export class TreeStrategyTree implements TreeStrategy {
 
     return reduce<TreeNodeI<P> | ReactNodeI<P>, TreeSubTreeContext<P>>(
       data?.children ?? [],
-      treeWalker<TreeSubTreeContext<P>>(root, treeAppenderIteratee),
+      treeWalker<TreeSubTreeContext<P>, any>(root, treeAppenderIteratee),
       subTreeContext,
     ).subTree
   }
