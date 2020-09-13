@@ -5,6 +5,8 @@ module.exports = {
     project: ['tsconfig.eslint.json'],
   },
   rules: {
+    // 'unused-imports/no-unused-imports-ts': 'error',
+    // 'arrow-body-style': off,
     // 'nx-enforce-module-boundaries': [
     //   'error',
     //   {

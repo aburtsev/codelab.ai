@@ -1,45 +1,26 @@
 /**
  * These callbacks are executed when visiting each Node during Tree traversal
  */
-import { Props } from '@codelab/shared/interface/props'
 import { Node } from '@codelab/core/node'
 import {
   NodeFinderAcc,
-  NodeI,
-  NodeInterface,
-} from '@codelab/shared/interface/node'
-import {
-  GraphSubTreeContext,
-  TreeSubTreeContext,
+  GraphSubTreeAcc,
+  TreeSubTreeAcc,
 } from '@codelab/shared/interface/tree'
 import { reduce } from 'lodash'
 import { treeWalker } from './traversal'
 
-export function nodeFinderIteratee<P extends Props = {}>(
-  { id, found, node }: NodeFinderAcc<P>,
-  child: Node<P>,
-) {
-  if (!node || !id) {
-    return null
-  }
-
-  if (child.id === id) {
-    // eslint-disable-next-line no-param-reassign
-    found = child
-  }
-
-  return {
-    id,
-    found,
-    node,
-  }
-}
+export const nodeFinderIteratee = (
+  { id, found, subTree }: NodeFinderAcc<Node>,
+  child: Node,
+): NodeFinderAcc<Node> => ({
+  id,
+  found: child.id === id ? child : found,
+  subTree,
+})
 
 // This needs to be in tree/graph/traversal level, a node doesn't know how to find itself. plus findNode uses treeWalker methods which is just <traversal></traversal>
-export function findNode<P extends Props = {}>(
-  id: string | undefined,
-  node: NodeInterface<P>,
-): NodeInterface<P> | null {
+export const findNode = (id: string | undefined, node: Node): Node | null => {
   if (!node) {
     throw new Error(`Node is undefined`)
   }
@@ -52,23 +33,23 @@ export function findNode<P extends Props = {}>(
     return node
   }
 
-  return reduce<NodeInterface<P>, NodeFinderAcc<P>>(
+  return reduce<Node, NodeFinderAcc<Node>>(
     node?.children ?? [],
-    treeWalker<NodeFinderAcc<P>, NodeInterface<P>>(null, nodeFinderIteratee),
+    treeWalker<NodeFinderAcc<Node>>(null, nodeFinderIteratee),
     {
-      node,
       found: null,
       id,
+      subTree: node,
     },
   ).found
 }
 
-export function treeAppenderIteratee<P extends Props>(
-  { subTree, parent }: TreeSubTreeContext<P>,
-  child: NodeI<P>,
-) {
-  const childNode = new Node<P>(child)
-  const parentNode = findNode(parent.id, subTree)
+export const treeAppenderIteratee = (
+  { subTree, parent }: TreeSubTreeAcc<Node>,
+  child: Node,
+) => {
+  const childNode = new Node(child)
+  const parentNode = findNode(parent?.id, subTree)
 
   if (!parentNode) {
     throw Error(`Node of id ${parent?.id} not found`)
@@ -82,11 +63,11 @@ export function treeAppenderIteratee<P extends Props>(
   }
 }
 
-export function graphAppenderIteratee<P extends Props>(
-  { graph, subTree, parent }: GraphSubTreeContext<P>,
-  child: NodeI<P>,
-) {
-  const node = new Node<P>(child)
+export const graphAppenderIteratee = (
+  { graph, subTree, parent }: GraphSubTreeAcc<Node>,
+  child: Node,
+) => {
+  const node = new Node(child)
   const parentNode = findNode(parent?.id, subTree)
 
   graph.addVertexFromNode(node)

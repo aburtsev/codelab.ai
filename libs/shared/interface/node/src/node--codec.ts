@@ -10,7 +10,7 @@ export type NodeI<P extends Props = any> =
   | TreeNodeI<P>
   | RefNodeI<P>
   | SchemaNodeI<P>
-  | ModelNodeI<P>
+// | ModelNodeI<P>
 
 export type NodeA<P extends Props = any> =
   | ReactNodeA<P>
