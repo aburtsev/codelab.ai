@@ -1,56 +1,59 @@
 import { ReactNodeI } from '@codelab/shared/interface/node'
 
-export const NodeMngmtPanel: ReactNodeI = {
-  type: 'Html.div',
-  nodeType: 'React',
-  children: [
-    wrapWithHtmlDiv([
-      {
-        nodeType: 'React',
-        type: 'Text',
-        props: { value: 'Current Selection: ' },
+export const NodeMngmtPanel: ReactNodeI[] = [
+    {
+      nodeType: 'React',
+      type: 'Text',
+      props: { value: 'Current Selection: ' },
+    },
+    {
+      nodeType: 'React',
+      type: 'Text',
+      props: {
+        value: {
+          eval: true,
+          value: 'return this.props.selectedNode',
+        },
       },
-      {
-        nodeType: 'React',
-        type: 'Text',
-        props: { value: 'Selected leaf' },
+    },
+    {
+      nodeType: 'React',
+      type: 'Button',
+      props: {
+        type: 'primary',
+        onClick: {
+          eval: true,
+          value: 'return ()=>{this.props.showCreateNodeForm()}',
+        },
       },
-    ]),
-    wrapWithHtmlDiv([
-      {
-        nodeType: 'React',
-        type: 'Button',
-        props: { type: 'primary' },
-        children: [
-          {
-            type: 'Text',
-            nodeType: 'React',
-            props: { value: 'Add to Selected Node' },
+      children: [
+        {
+          type: 'Text',
+          nodeType: 'React',
+          props: {
+            value: 'Add to Selected Node',
           },
-        ],
+        },
+      ],
+    },
+    {
+      nodeType: 'React',
+      type: 'Button',
+      props: {
+        type: 'primary',
+        onClick: {
+          eval: true,
+          value: 'return ()=>{this.props.deleteNode()}',
+        },
       },
-    ]),
-    wrapWithHtmlDiv([
-      {
-        nodeType: 'React',
-        type: 'Button',
-        props: { type: 'primary' },
-        children: [
-          {
-            type: 'Text',
-            nodeType: 'React',
-            props: { value: 'Delete Selected Node' },
+      children: [
+        {
+          type: 'Text',
+          nodeType: 'React',
+          props: {
+            value: 'Delete Selected Node',
           },
-        ],
-      },
-    ]),
-  ],
-}
-
-function wrapWithHtmlDiv(nodes: ReactNodeI[]): ReactNodeI {
-  return {
-    type: 'Html.div',
-    nodeType: 'React',
-    children: nodes,
-  }
-}
+        },
+      ],
+    },
+]
