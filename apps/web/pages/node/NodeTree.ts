@@ -6,9 +6,14 @@ export const treeData: ReactNodeI = {
   props: {
     showLine: true,
     showIcon: true,
+    // onSelect: {
+    //   eval: true,
+    //   value: '(values)=>{console.log("node. onSelect"); this.props.onTreeNodeSelected.value(values)}'
+    // },
     treeData: {
       eval: true,
-      value: 'return this.props.treeDataNodes.value?this.props.treeDataNodes.value:[]',
+      value: 'return []'
+        // value: 'return this.props.treeDataNodes.value?this.props.treeDataNodes.value:[]',
     },
   },
 }
