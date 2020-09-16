@@ -17,9 +17,11 @@ export const CreateNodeFormNodeTypeSelect: ReactNodeI = {
           width: 300,
         },
       },
-      children: Object.keys(NodeTypeEnum).map((nodeType) =>
-        generateSelectOption<NodeTypeEnum>(NodeTypeEnum[nodeType]),
-      ),
+      // TODO need to use conditional form fields, because each type has different mandatory fields
+      children: [generateSelectOption( NodeTypeEnum.React )]
+        // children: Object.keys(NodeTypeEnum).map((nodeType) =>
+      //   generateSelectOption<NodeTypeEnum>(NodeTypeEnum[nodeType]),
+      // ),
     },
   ],
 }

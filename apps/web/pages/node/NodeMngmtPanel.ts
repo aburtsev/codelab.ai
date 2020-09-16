@@ -1,6 +1,7 @@
 import { ReactNodeI } from '@codelab/shared/interface/node'
 
 export const NodeMngmtPanel: ReactNodeI[] = [
+
     {
       nodeType: 'React',
       type: 'Text',

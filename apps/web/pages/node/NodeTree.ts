@@ -1,46 +1,14 @@
-import { ReactNodeI } from '@codelab/shared/interface/node';
-import {TreeProps, TreeNodeProps} from '../../../../libs/components/ui/src/components/tree'
-// temporary solution. Waiting until https://github.com/codelab-ai/codelab.ai/issues/90
-// be done
-//
+import { ReactNodeI } from '@codelab/shared/interface/node'
 
-export const treeData: ReactNodeI<TreeProps | TreeNodeProps> = {
+export const treeData: ReactNodeI = {
   type: 'Tree',
   nodeType: 'React',
   props: {
     showLine: true,
     showIcon: true,
-    treeData: [
-      // {
-      //   title: 'parent 1',
-      //   key: '0-0',
-      //   children: [
-      //     {
-      //       title: 'parent 1-0',
-      //       key: '0-0-0',
-      //       children: [
-      //         {
-      //           title: 'leaf 1',
-      //           key: '0-0-0-0',
-      //         },
-      //         {
-      //           title: 'leaf 2',
-      //           key: '0-0-0-1',
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       title: 'parent 1-1',
-      //       key: '0-0-1',
-      //       children: [
-      //         {
-      //           title: 'sss',
-      //           key: '0-0-1-0',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // },
-    ],
+    treeData: {
+      eval: true,
+      value: 'return this.props.treeDataNodes.value?this.props.treeDataNodes.value:[]',
+    },
   },
 }
