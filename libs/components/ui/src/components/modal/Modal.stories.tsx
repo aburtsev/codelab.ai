@@ -1,5 +1,5 @@
 import React from 'react'
-import { modalData } from './Modal.data'
+import { modalData, modalDataWithForm } from './Modal.data'
 import { TreeDom } from '../../renderer/TreeDom'
 
 export default {
@@ -9,5 +9,12 @@ export default {
 export const Default = () => {
   const Modal = TreeDom.render(modalData)
 
+  return <Modal />
+}
+
+
+export const WithForm = () => {
+
+  const Modal = TreeDom.render(modalDataWithForm)
   return <Modal />
 }
