@@ -59,3 +59,76 @@ export const leafRenderPropsData: ReactNodeI = {
     },
   ],
 }
+
+export const leafRenderPropsInternalCbData: ReactNodeI = {
+  type: 'Html.div',
+  nodeType: 'React',
+  props: {
+    visibility: '',
+    leafcb: {
+      renderProps: 'leaf',
+      value: 'return ()=>console.log("leafcb fired!")',
+    },
+  },
+  children: [
+    {
+      type: 'Html.div',
+      nodeType: 'React',
+      children: [
+        {
+          type: 'Button',
+          nodeType: 'React',
+          props: {
+            onClick: {
+              eval: true,
+              value:
+                'return ()=>{console.log(this.props.leafcb); this.props.leafcb.value() }',
+            },
+          },
+          children: [
+            {
+              nodeType: 'React',
+              type: 'Text',
+              props: {
+                value: 'Fire parent cb',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+export const leafRenderPropsExternalCbData: ReactNodeI = {
+  type: 'Html.div',
+  nodeType: 'React',
+  children: [
+    {
+      type: 'Html.div',
+      nodeType: 'React',
+      children: [
+        {
+          type: 'Button',
+          nodeType: 'React',
+          props: {
+            onClick: {
+              eval: true,
+              value:
+                'return ()=>{ console.log(this.props.extCb); this.props.extCb.value() }',
+            },
+          },
+          children: [
+            {
+              nodeType: 'React',
+              type: 'Text',
+              props: {
+                value: 'Fire external cb',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
