@@ -5,6 +5,9 @@ import {
   leafRenderPropsExternalCbData,
   leafRenderPropsInternalCustomCbData,
   leafRenderPropsExternalAndPassKnownPropData,
+  RegularPropsCbData,
+  ProviderCustomPropsCbData,
+  leafRenderPropsCbData,
 } from './Props-renderProps.data'
 import { divData } from '../components/html/Html.data'
 
@@ -24,15 +27,27 @@ export const Children = () => {
   return <Div>Content</Div>
 }
 
+export const RegularPropsCb = () => {
+  const Component = TreeDom.render(RegularPropsCbData)
+
+  return <Component />
+}
+
+export const ProviderCustomPropsCb = () => {
+  const Component = TreeDom.render(ProviderCustomPropsCbData)
+
+  return <Component />
+}
+
 export const InternalLeafPropCustomCb = () => {
   const Component = TreeDom.render(leafRenderPropsInternalCustomCbData)
 
   return <Component />
 }
 
-  const extCb = () => {
-    console.log('External cb triggered')
-  }
+const extCb = () => {
+  console.log('External cb triggered')
+}
 export const externalPropCb = () => {
   const Component = TreeDom.render(leafRenderPropsExternalCbData)
 
