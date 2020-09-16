@@ -60,7 +60,7 @@ export const leafRenderPropsData: ReactNodeI = {
   ],
 }
 
-export const leafRenderPropsInternalCbData: ReactNodeI = {
+export const leafRenderPropsInternalCustomCbData: ReactNodeI = {
   type: 'Html.div',
   nodeType: 'React',
   props: {
@@ -118,6 +118,45 @@ export const leafRenderPropsExternalCbData: ReactNodeI = {
                 'return ()=>{ console.log(this.props.extCb); this.props.extCb.value() }',
             },
           },
+          children: [
+            {
+              nodeType: 'React',
+              type: 'Text',
+              props: {
+                value: 'Fire external cb',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+export const leafRenderPropsExternalAndPassKnownPropData: ReactNodeI = {
+  type: 'Html.div',
+  nodeType: 'React',
+  props: {
+    ctx: {
+      eval: true,
+      value:
+        'const [isTouched, touch] = this.React.useState(false); return { isTouched, touch }',
+    },
+    onClick: {
+      eval: true,
+      renderProps: 'leaf',
+      value:
+        'return ()=>{ console.log(this.props.extCb); this.touch(true); this.props.extCb.value() }',
+    },
+  },
+  children: [
+    {
+      type: 'Html.div',
+      nodeType: 'React',
+      children: [
+        {
+          type: 'Button',
+          nodeType: 'React',
           children: [
             {
               nodeType: 'React',

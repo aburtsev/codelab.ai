@@ -3,7 +3,8 @@ import { TreeDom } from '../renderer/TreeDom'
 import {
   renderPropsData,
   leafRenderPropsExternalCbData,
-  leafRenderPropsInternalCbData,
+  leafRenderPropsInternalCustomCbData,
+  leafRenderPropsExternalAndPassKnownPropData,
 } from './Props-renderProps.data'
 import { divData } from '../components/html/Html.data'
 
@@ -23,17 +24,23 @@ export const Children = () => {
   return <Div>Content</Div>
 }
 
-export const InternalLeafPropCb = () => {
-  const Component = TreeDom.render(leafRenderPropsInternalCbData)
+export const InternalLeafPropCustomCb = () => {
+  const Component = TreeDom.render(leafRenderPropsInternalCustomCbData)
 
   return <Component />
 }
 
-export const extPropCb = () => {
   const extCb = () => {
     console.log('External cb triggered')
   }
+export const externalPropCb = () => {
   const Component = TreeDom.render(leafRenderPropsExternalCbData)
+
+  return <Component extCb={extCb} />
+}
+
+export const externalPropAndCtxCb = () => {
+  const Component = TreeDom.render(leafRenderPropsExternalAndPassKnownPropData)
 
   return <Component extCb={extCb} />
 }
