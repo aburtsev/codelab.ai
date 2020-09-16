@@ -12,7 +12,7 @@ export const CreateNodeFormProps: ReactNodeI = {
       type: 'Form.List',
       nodeType: 'React',
       props: {
-        name: 'fields',
+        name: 'props',
       },
       children: [
         {
