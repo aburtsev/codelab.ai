@@ -59,3 +59,41 @@ export const leafRenderPropsData: ReactNodeI = {
     },
   ],
 }
+
+export const BasicPropsPassedInDeepData: ReactNodeI = {
+  type: 'Html.div',
+  nodeType: 'React',
+  props: {
+    onClick: {
+      eval: true,
+      value: 'return ()=>console.log("Root onClick cb is fired")',
+    },
+  },
+  children: [
+    {
+      type: 'Html.div',
+      nodeType: 'React',
+      children: [
+        {
+          type: 'Html.div',
+          nodeType: 'React',
+          children: [
+            {
+              type: 'Button',
+              nodeType: 'React',
+              children: [
+                {
+                  nodeType: 'React',
+                  type: 'Text',
+                  props: {
+                    value: "3rd level but Cb still available",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
